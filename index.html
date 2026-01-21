@@ -1335,6 +1335,21 @@
         width: 100%;
         justify-content: center;
       }
+
+      /* Hide Let's Talk button on mobile to make room for hamburger */
+      .nav-right .btn-outline {
+        display: none;
+      }
+
+      .nav-right {
+        gap: 0.75rem;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .nav-logo {
+        width: 200px;
+      }
     }
   </style>
 </head>
@@ -1828,94 +1843,121 @@
     // Smooth scroll-based logo scaling (matching Framer template sizes)
     const navbar = document.querySelector('nav');
     const heroLogo = document.getElementById('hero-logo');
+    const scrollProgressBar = document.querySelector('.scroll-progress');
+    const heroGlow = document.querySelector('.hero-glow');
+    const heroNetwork = document.querySelector('.hero-network');
+    const scrollText = document.getElementById('scroll-text');
+    const scrollWords = scrollText ? scrollText.querySelectorAll('.scroll-word') : [];
+
+    // Cache logo sizes to avoid recalculating on every scroll
+    let cachedLogoSizes = null;
+    let lastWidth = window.innerWidth;
 
     // Responsive logo sizing function
     function getLogoSizes() {
-      const isMobile = window.innerWidth <= 768;
+      const width = window.innerWidth;
+      const isVerySmall = width <= 400;
+      const isMobile = width <= 768;
       return {
-        max: isMobile ? 280 : 640,  // CSS width value
-        min: isMobile ? 100 : 120,
+        max: isVerySmall ? 200 : (isMobile ? 280 : 640),
+        min: isVerySmall ? 80 : (isMobile ? 100 : 120),
         scrollDistance: isMobile ? 150 : 300
       };
     }
 
-    function updateLogoSize() {
-      const scrollY = window.pageYOffset;
-      const sizes = getLogoSizes();
+    function updateCachedSizes() {
+      cachedLogoSizes = getLogoSizes();
+    }
 
-      // Calculate scale based on scroll position
-      const scrollProgress = Math.min(scrollY / sizes.scrollDistance, 1);
+    // Consolidated scroll handler for all scroll-based effects
+    function handleAllScrollEffects() {
+      // Clamp scrollY to prevent negative values during pull-to-refresh/overscroll
+      const scrollY = Math.max(0, window.pageYOffset || window.scrollY || 0);
+
+      if (!cachedLogoSizes) updateCachedSizes();
+      const sizes = cachedLogoSizes;
+
+      // === LOGO SCALING ===
+      // Calculate scale based on scroll position (clamped 0-1)
+      const logoScrollProgress = Math.min(Math.max(scrollY / sizes.scrollDistance, 0), 1);
 
       // Use easeOutCubic for smooth deceleration
-      const eased = 1 - Math.pow(1 - scrollProgress, 3);
+      const eased = 1 - Math.pow(1 - logoScrollProgress, 3);
 
-      // Calculate current width and scale
+      // Calculate current width and scale (clamped to prevent issues)
       const currentWidth = sizes.max - (sizes.max - sizes.min) * eased;
-      const scale = currentWidth / sizes.max;
+      const scale = Math.max(0.1, Math.min(1, currentWidth / sizes.max));
 
       // Apply transform for smooth scaling
       heroLogo.style.transform = `scale(${scale})`;
 
       // Toggle navbar background
-      if (scrollProgress > 0.3) {
+      if (logoScrollProgress > 0.3) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
+
+      // === SCROLL PROGRESS INDICATOR ===
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const scrollPercent = docHeight > 0 ? scrollY / docHeight : 0;
+      scrollProgressBar.style.transform = `scaleX(${Math.min(scrollPercent, 1)})`;
+
+      // === WORD HIGHLIGHTING ===
+      if (scrollText && scrollWords.length > 0) {
+        const rect = scrollText.getBoundingClientRect();
+        const wordProgress = Math.max(0, Math.min(1,
+          (window.innerHeight - rect.top) / (window.innerHeight + rect.height)
+        ));
+        const wordsToHighlight = Math.floor(wordProgress * scrollWords.length * 1.5);
+
+        scrollWords.forEach((word, index) => {
+          if (index < wordsToHighlight) {
+            word.classList.add('active');
+          } else {
+            word.classList.remove('active');
+          }
+        });
+      }
+
+      // === PARALLAX EFFECTS ===
+      if (heroGlow) {
+        heroGlow.style.transform = `translateX(-50%) translateY(${scrollY * 0.2}px)`;
+      }
+      if (heroNetwork) {
+        heroNetwork.style.transform = `translate(-50%, -50%) translateY(${scrollY * 0.1}px)`;
+      }
     }
 
-    // Use requestAnimationFrame for ultra-smooth animation
-    let ticking = false;
+    // Use requestAnimationFrame for smooth 60fps animation
+    let scrollTicking = false;
     window.addEventListener('scroll', () => {
-      if (!ticking) {
+      if (!scrollTicking) {
         requestAnimationFrame(() => {
-          updateLogoSize();
-          ticking = false;
+          handleAllScrollEffects();
+          scrollTicking = false;
         });
-        ticking = true;
+        scrollTicking = true;
       }
-    });
+    }, { passive: true });
 
-    // Update on resize
-    window.addEventListener('resize', updateLogoSize);
+    // Debounced resize handler
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        // Only recalculate if width changed (not just height)
+        if (Math.abs(window.innerWidth - lastWidth) > 10) {
+          lastWidth = window.innerWidth;
+          updateCachedSizes();
+          handleAllScrollEffects();
+        }
+      }, 100);
+    }, { passive: true });
 
     // Initialize on load
-    updateLogoSize();
-
-    // Scroll progress indicator
-    const scrollProgress = document.querySelector('.scroll-progress');
-
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = scrolled / docHeight;
-      scrollProgress.style.transform = `scaleX(${scrollPercent})`;
-    });
-
-    // Scroll-triggered word highlighting
-    function handleScrollWords() {
-      const scrollText = document.getElementById('scroll-text');
-      if (!scrollText) return;
-
-      const words = scrollText.querySelectorAll('.scroll-word');
-      const rect = scrollText.getBoundingClientRect();
-      const scrollProgress = Math.max(0, Math.min(1,
-        (window.innerHeight - rect.top) / (window.innerHeight + rect.height)
-      ));
-
-      const wordsToHighlight = Math.floor(scrollProgress * words.length * 1.5);
-
-      words.forEach((word, index) => {
-        if (index < wordsToHighlight) {
-          word.classList.add('active');
-        } else {
-          word.classList.remove('active');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', handleScrollWords);
-    handleScrollWords();
+    updateCachedSizes();
+    handleAllScrollEffects();
 
     // FAQ accordion
     document.querySelectorAll('.faq-question').forEach(button => {
@@ -1945,20 +1987,6 @@
           });
         }
       });
-    });
-
-    // Parallax effect for hero elements
-    window.addEventListener('scroll', () => {
-      const scrolled = window.pageYOffset;
-      const heroGlow = document.querySelector('.hero-glow');
-      const heroNetwork = document.querySelector('.hero-network');
-
-      if (heroGlow) {
-        heroGlow.style.transform = `translateX(-50%) translateY(${scrolled * 0.2}px)`;
-      }
-      if (heroNetwork) {
-        heroNetwork.style.transform = `translate(-50%, -50%) translateY(${scrolled * 0.1}px)`;
-      }
     });
   </script>
 </body>
