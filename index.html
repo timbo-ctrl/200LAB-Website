@@ -419,6 +419,9 @@
       bottom: 0;
       overflow: hidden;
       z-index: 0;
+      background-image: url('assets/images/200Hero2.png');
+      background-size: cover;
+      background-position: center;
     }
 
     .hero-network {
@@ -567,12 +570,22 @@
       animation: marquee 30s linear infinite;
     }
 
-    .marquee-content span {
+    .marquee-content img {
       display: inline-block;
-      margin: 0 3rem;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      color: var(--text-muted);
+      width: auto;
+      height: auto;
+      max-height: 40px;
+      max-width: 140px;
+      margin: 0 4rem;
+      vertical-align: middle;
+      opacity: 0.6;
+      filter: grayscale(100%) brightness(1.2);
+      transition: all 0.4s ease;
+    }
+
+    .marquee-content img:hover {
+      opacity: 1;
+      filter: grayscale(0%) brightness(1);
     }
 
     @keyframes marquee {
@@ -758,6 +771,13 @@
       font-size: clamp(3rem, 6vw, 5rem);
       font-weight: 700;
       color: #2a2a2a;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* ===== STATS SECTION ===== */
@@ -1882,11 +1902,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-network"></div>
-      <div class="hero-glow"></div>
-      <div class="hero-glow-2"></div>
-    </div>
+    <div class="hero-bg"></div>
 
     <div class="hero-content">
       <div class="hero-left">
@@ -1910,22 +1926,33 @@
       <p class="trusted-label">Trusted by:</p>
       <div class="marquee">
         <div class="marquee-content">
-          <span>Client One</span>
-          <span>•</span>
-          <span>Client Two</span>
-          <span>•</span>
-          <span>Client Three</span>
-          <span>•</span>
-          <span>Client Four</span>
-          <span>•</span>
-          <span>Client One</span>
-          <span>•</span>
-          <span>Client Two</span>
-          <span>•</span>
-          <span>Client Three</span>
-          <span>•</span>
-          <span>Client Four</span>
-          <span>•</span>
+          <!-- Set 1 -->
+          <img src="assets/logos/Milwaukee fix.png" alt="Milwaukee">
+          <img src="assets/logos/SHERBINSKIS.png" alt="Sherbinskis">
+          <img src="assets/logos/Therabody_idXBa8yZ3D_1.png" alt="Therabody">
+          <img src="assets/logos/boutiq.png" alt="Boutiq">
+          <img src="assets/logos/OneBlade Logo.png" alt="OneBlade">
+
+          <!-- Set 2 -->
+          <img src="assets/logos/Milwaukee fix.png" alt="Milwaukee">
+          <img src="assets/logos/SHERBINSKIS.png" alt="Sherbinskis">
+          <img src="assets/logos/Therabody_idXBa8yZ3D_1.png" alt="Therabody">
+          <img src="assets/logos/boutiq.png" alt="Boutiq">
+          <img src="assets/logos/OneBlade Logo.png" alt="OneBlade">
+
+          <!-- Set 3 -->
+          <img src="assets/logos/Milwaukee fix.png" alt="Milwaukee">
+          <img src="assets/logos/SHERBINSKIS.png" alt="Sherbinskis">
+          <img src="assets/logos/Therabody_idXBa8yZ3D_1.png" alt="Therabody">
+          <img src="assets/logos/boutiq.png" alt="Boutiq">
+          <img src="assets/logos/OneBlade Logo.png" alt="OneBlade">
+
+          <!-- Set 4 -->
+          <img src="assets/logos/Milwaukee fix.png" alt="Milwaukee">
+          <img src="assets/logos/SHERBINSKIS.png" alt="Sherbinskis">
+          <img src="assets/logos/Therabody_idXBa8yZ3D_1.png" alt="Therabody">
+          <img src="assets/logos/boutiq.png" alt="Boutiq">
+          <img src="assets/logos/OneBlade Logo.png" alt="OneBlade">
         </div>
       </div>
     </div>
@@ -1980,7 +2007,7 @@
         <h2 class="work-title">OUR<br>WORK</h2>
       </div>
       <div class="work-count">
-        <span>03</span> / 04
+        <span>04</span> / 19
       </div>
     </div>
 
@@ -1994,7 +2021,7 @@
           <span class="project-status status-licensed">Licensed</span>
         </div>
         <div class="project-image">
-          <span class="project-image-text">LTHR</span>
+          <img src="assets/work/LTHR centered.png" alt="LTHR Project">
         </div>
       </div>
 
@@ -2007,7 +2034,7 @@
           <span class="project-status status-live">Live</span>
         </div>
         <div class="project-image">
-          <span class="project-image-text">NotBought</span>
+          <img src="assets/work/NotBought 2.png" alt="NotBought.ai Project">
         </div>
       </div>
 
@@ -2017,10 +2044,24 @@
           <span class="project-number">03</span>
           <h3 class="project-name">Let's Go For A Walk</h3>
           <p class="project-desc">A mindful walking app for daily mental health</p>
-          <span class="project-status status-launching">Launching 2025</span>
+          <span class="project-status status-live">Live</span>
         </div>
         <div class="project-image">
-          <span class="project-image-text">LGFAW</span>
+          <img src="assets/work/LGFAW.png" alt="Let's Go For A Walk Project">
+        </div>
+      </div>
+
+      <!-- Project 4: Fight Ugly -->
+      <div class="project-item">
+        <div class="project-info">
+          <span class="project-number">04</span>
+          <h3 class="project-name">Fight Ugly</h3>
+          <p class="project-desc">The science-backed anti-aging brand helping men fight time, not their skincare
+            routine.</p>
+          <span class="project-status status-launching">Launching 2026</span>
+        </div>
+        <div class="project-image">
+          <img src="assets/work/FIGHT UGLY 1600x1000.png" alt="Fight Ugly Project">
         </div>
       </div>
     </div>
@@ -2042,8 +2083,8 @@
           <p class="stat-label">Products Launched</p>
         </div>
         <div class="stat-item">
-          <div class="stat-number">3</div>
-          <p class="stat-label">Products Licensed</p>
+          <div class="stat-number">14</div>
+          <p class="stat-label">Product IP Portfolio</p>
         </div>
         <div class="stat-item">
           <div class="stat-number">10<span class="accent">+</span></div>
@@ -2060,7 +2101,7 @@
   <!-- Services Section -->
   <section id="services" class="services-section">
     <div class="services-header">
-      <h2 class="services-title">HOW WE<br>CAN HELP</h2>
+      <h2 class="services-title">WHAT WE<br>CAN DO</h2>
       <span class="services-label">(Services)</span>
     </div>
 
@@ -2121,7 +2162,7 @@
   <!-- Process Section -->
   <section id="process" class="process-section">
     <div class="process-header">
-      <h2 class="process-title">HOW WE<br>WORK</h2>
+      <h2 class="process-title">HOW WE<br>DO IT</h2>
       <span class="process-label">(Process)</span>
     </div>
 
