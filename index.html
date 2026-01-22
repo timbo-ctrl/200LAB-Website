@@ -1578,6 +1578,41 @@
       margin-bottom: 0;
     }
 
+    /* ===== SPLASH SCREEN ===== */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      background-color: var(--accent);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    #splash-screen.splash-exit {
+      transform: translateY(-100%);
+    }
+
+    #splash-screen img {
+      width: 120px;
+      height: auto;
+      opacity: 0;
+      animation: logoFadeIn 0.8s ease forwards;
+    }
+
+    @keyframes logoFadeIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
     /* ===== SCROLL PROGRESS ===== */
     .scroll-progress {
       position: fixed;
@@ -1753,6 +1788,10 @@
 </head>
 
 <body>
+  <!-- Splash Screen -->
+  <div id="splash-screen">
+    <img src="200logo-black-tm.png" alt="200LAB Loading">
+  </div>
   <!-- Contact Modal -->
   <div class="contact-modal-overlay" id="contact-modal">
     <div class="contact-modal">
@@ -1783,7 +1822,7 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-logo-container">
-      <a href="#">
+      <a href="." aria-label="Home - Refresh Page">
         <img src="200logo-green.png" alt="200LAB" class="nav-logo" id="hero-logo">
       </a>
     </div>
@@ -1897,22 +1936,38 @@
     <div class="about-content">
       <p class="section-label">(About)</p>
       <h2 id="scroll-text" class="about-text">
-        <span class="scroll-word">We</span>
-        <span class="scroll-word">combine</span>
-        <span class="scroll-word">years</span>
-        <span class="scroll-word">of</span>
+        <span class="scroll-word">We're</span>
         <span class="scroll-word">product</span>
-        <span class="scroll-word">development</span>
+        <span class="scroll-word">developers.</span>
+        <span class="scroll-word">We</span>
+        <span class="scroll-word">take</span>
+        <span class="scroll-word">ideas</span>
+        <span class="scroll-word">that</span>
+        <span class="scroll-word">should</span>
+        <span class="scroll-word">exist</span>
         <span class="scroll-word">and</span>
-        <span class="scroll-word">branding</span>
-        <span class="scroll-word">expertise</span>
+        <span class="scroll-word">build</span>
+        <span class="scroll-word">them—whether</span>
+        <span class="scroll-word">that's</span>
+        <span class="scroll-word">a</span>
+        <span class="scroll-word">physical</span>
+        <span class="scroll-word">product,</span>
+        <span class="scroll-word">an</span>
+        <span class="scroll-word">app,</span>
+        <span class="scroll-word">or</span>
+        <span class="scroll-word">a</span>
+        <span class="scroll-word">brand.</span>
+        <span class="scroll-word">If</span>
+        <span class="scroll-word">it</span>
+        <span class="scroll-word">can</span>
+        <span class="scroll-word">go</span>
         <span class="scroll-word">to</span>
-        <span class="scroll-word">craft</span>
-        <span class="scroll-word">meaningful,</span>
-        <span class="scroll-word">and</span>
-        <span class="scroll-word">memorable</span>
-        <span class="scroll-word">consumer</span>
-        <span class="scroll-word">experiences.</span>
+        <span class="scroll-word">market,</span>
+        <span class="scroll-word">we</span>
+        <span class="scroll-word">can</span>
+        <span class="scroll-word">get</span>
+        <span class="scroll-word">it</span>
+        <span class="scroll-word">there.</span>
       </h2>
     </div>
   </section>
@@ -2180,8 +2235,7 @@
         <h2 class="cta-title">LET'S WORK<br>TOGETHER</h2>
       </div>
       <div class="cta-right">
-        <p class="cta-subtitle">Have a project in mind? We'd love to hear about it. Let's create something great
-          together!</p>
+        <p class="cta-subtitle">Have a product idea? Let's build it.</p>
         <button class="cta-btn" onclick="openContactModal()">Get in Touch</button>
       </div>
     </div>
@@ -2195,7 +2249,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <img src="200logo-black-tm.png" alt="200LAB">
-          <p>Product developers.<br>From napkin to market.</p>
+
         </div>
 
         <div class="footer-column">
@@ -2230,6 +2284,23 @@
   </footer>
 
   <script>
+    // Splash Screen
+    window.addEventListener('load', () => {
+      const splashScreen = document.getElementById('splash-screen');
+      console.log('Splash screen element:', splashScreen);
+
+      if (splashScreen) {
+        // Keep splash visible for a moment then animate out
+        setTimeout(() => {
+          splashScreen.classList.add('splash-exit');
+          // Remove from DOM after animation
+          setTimeout(() => {
+            splashScreen.remove();
+          }, 800);
+        }, 1500);
+      }
+    });
+
     // Contact Modal
     const contactModal = document.getElementById('contact-modal');
     const contactModalClose = document.getElementById('contact-modal-close');
