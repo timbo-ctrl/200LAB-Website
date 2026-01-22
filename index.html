@@ -1051,7 +1051,13 @@
     .process-carousel {
       display: flex;
       gap: 0;
-      min-width: max-content;
+      width: max-content;
+      /* Changed from min-width to prevent over-scrolling */
+    }
+
+    .process-card:last-child {
+      padding-right: 2rem;
+      /* Small breathing room at the end */
     }
 
     .process-card {
