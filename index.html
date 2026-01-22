@@ -1040,6 +1040,8 @@
       padding: 0 0 2rem 2rem;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      overscroll-behavior-x: contain;
+      /* Prevent elastic/momentum scroll past bounds */
       /* Add padding-right to the last child instead via pseudo-element to look better if needed, 
          but for now removing wrapper right padding fixes the 'blank space' scroll issue */
     }
