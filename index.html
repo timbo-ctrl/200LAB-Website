@@ -33,7 +33,7 @@
     }
 
     html {
-      /* Removed scroll-behavior: smooth - causes jank with JS scroll handlers on mobile */
+      scroll-behavior: smooth;
     }
 
     body {
@@ -858,126 +858,179 @@
       color: var(--text-muted);
     }
 
-    /* ===== SERVICES SECTION ===== */
+    /* ===== SERVICES SECTION (Framer-style) ===== */
     .services-section {
-      padding: 6rem 2rem;
-    }
-
-    .services-container {
-      max-width: 1400px;
-      margin: 0 auto;
+      padding: 6rem 0;
+      overflow: hidden;
     }
 
     .services-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 0 2rem;
       margin-bottom: 4rem;
     }
 
     .services-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-size: clamp(3rem, 8vw, 8rem);
       font-weight: 700;
       text-transform: uppercase;
+      line-height: 0.9;
+      flex-shrink: 0;
     }
 
-    .services-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      overflow: hidden;
-    }
-
-    .service-card {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 2rem;
-      padding: 2.5rem;
-      background: var(--bg-primary);
-      align-items: start;
-      transition: all 0.4s ease;
-    }
-
-    .service-card:hover {
-      background: var(--bg-secondary);
-      padding-left: 3rem;
-    }
-
-    .service-number {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2rem;
-      font-weight: 700;
+    .services-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
       color: var(--text-muted);
+      margin-top: 0.5rem;
     }
 
-    .service-number .dot {
+    .services-list {
+      width: 100%;
+    }
+
+    .service-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      padding: 2rem 2rem;
+      border-top: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+    }
+
+    .service-row:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-row:hover {
+      background: var(--bg-secondary);
+    }
+
+    .service-row:hover .service-row-title {
       color: var(--accent);
     }
 
-    .service-content h3 {
+    .service-row-number {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      color: var(--text-muted);
     }
 
-    .service-content p {
+    .service-row-number .dot {
+      color: var(--accent);
+    }
+
+    .service-row-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .service-row-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .service-row-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+      opacity: 0;
+    }
+
+    .service-row.expanded .service-row-details {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    .service-row-desc {
       color: var(--text-secondary);
       max-width: 500px;
+      margin-bottom: 1rem;
     }
 
-    .service-tags {
+    .service-row-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      justify-content: flex-end;
     }
 
-    .service-tag {
-      padding: 0.5rem 1rem;
-      font-size: 0.75rem;
+    .service-row-tag {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.7rem;
       color: var(--text-muted);
-      background: var(--border);
+      border: 1px solid var(--border);
       border-radius: 100px;
     }
 
-    /* ===== PROCESS SECTION ===== */
+    /* ===== PROCESS SECTION (Framer-style horizontal scroll) ===== */
     .process-section {
-      padding: 6rem 2rem;
-      background: var(--bg-secondary);
-    }
-
-    .process-container {
-      max-width: 1400px;
-      margin: 0 auto;
+      padding: 6rem 0;
+      background: var(--bg-primary);
+      overflow: hidden;
     }
 
     .process-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 2rem;
+      padding: 0 2rem;
       margin-bottom: 4rem;
     }
 
     .process-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-size: clamp(3rem, 8vw, 8rem);
       font-weight: 700;
       text-transform: uppercase;
+      line-height: 0.9;
     }
 
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      overflow: hidden;
+    .process-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+
+    .process-scroll-wrapper {
+      position: relative;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 2rem 2rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .process-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .process-carousel {
+      display: flex;
+      gap: 0;
+      min-width: max-content;
     }
 
     .process-card {
-      background: var(--bg-primary);
+      flex: 0 0 320px;
       padding: 2.5rem;
+      border-left: 1px solid var(--border);
       transition: all 0.3s ease;
+    }
+
+    .process-card:first-child {
+      border-left: none;
     }
 
     .process-card:hover {
@@ -995,10 +1048,10 @@
 
     .process-step-number {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 3rem;
-      font-weight: 700;
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
     }
 
     .process-step-number .dot {
@@ -1007,9 +1060,10 @@
 
     .process-card h3 {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 600;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
 
     .process-card p {
@@ -1103,12 +1157,12 @@
       line-height: 1.7;
     }
 
-    /* ===== CTA SECTION ===== */
+    /* ===== CTA SECTION (Framer-style) ===== */
     .cta-section {
-      padding: 8rem 2rem;
-      text-align: center;
+      padding: 0;
       position: relative;
       overflow: hidden;
+      min-height: 500px;
     }
 
     .cta-bg {
@@ -1117,49 +1171,105 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: radial-gradient(circle at center, rgba(255, 69, 0, 0.05) 0%, transparent 60%);
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.4) 100%);
+      z-index: 1;
+    }
+
+    .cta-bg-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="%23111" width="100" height="100"/></svg>');
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
     }
 
     .cta-content {
       position: relative;
-      z-index: 1;
-      max-width: 800px;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1400px;
       margin: 0 auto;
+      padding: 6rem 2rem;
+      align-items: center;
+    }
+
+    .cta-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
     }
 
     .cta-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(2.5rem, 6vw, 5rem);
       font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .cta-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: flex-start;
     }
 
     .cta-subtitle {
       color: var(--text-secondary);
-      font-size: 1.125rem;
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 400px;
     }
 
-    /* ===== FOOTER ===== */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 100px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    /* ===== FOOTER (Original red style with newsletter) ===== */
     footer {
       background: var(--accent);
       padding: 4rem 2rem 2rem;
       border-top: none;
+      position: relative;
+      overflow: hidden;
     }
 
     .footer-container {
       max-width: 1400px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+      gap: 3rem;
       margin-bottom: 4rem;
     }
 
@@ -1178,7 +1288,7 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.5);
       margin-bottom: 1rem;
     }
 
@@ -1187,13 +1297,73 @@
       color: var(--bg-primary);
       text-decoration: none;
       font-size: 0.9rem;
-      padding: 0.4rem 0;
+      padding: 0.3rem 0;
       transition: color 0.3s ease;
       font-weight: 500;
     }
 
     .footer-column a:hover {
       color: white;
+    }
+
+    .footer-newsletter h4 {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(0, 0, 0, 0.5);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-newsletter p {
+      font-size: 0.85rem;
+      color: var(--bg-primary);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .newsletter-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      padding: 0.75rem 0;
+      color: var(--bg-primary);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .newsletter-input::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--bg-primary);
+    }
+
+    .newsletter-btn {
+      align-self: flex-start;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--bg-primary);
+      color: var(--accent);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-btn:hover {
+      background: white;
+      color: var(--bg-primary);
     }
 
     .footer-bottom {
@@ -1205,8 +1375,10 @@
     }
 
     .footer-copyright {
-      color: rgba(0, 0, 0, 0.6);
-      font-size: 0.8rem;
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .footer-legal {
@@ -1215,7 +1387,7 @@
     }
 
     .footer-legal a {
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.5);
       text-decoration: none;
       font-size: 0.8rem;
       transition: color 0.3s ease;
@@ -1223,6 +1395,187 @@
 
     .footer-legal a:hover {
       color: var(--bg-primary);
+    }
+
+    .footer-watermark {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(150px, 25vw, 300px);
+      font-weight: 700;
+      font-style: italic;
+      color: rgba(0, 0, 0, 0.08);
+      pointer-events: none;
+      z-index: 0;
+      line-height: 1;
+    }
+
+    /* ===== CONTACT MODAL ===== */
+    .contact-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .contact-modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      max-width: 500px;
+      width: 100%;
+      padding: 3rem;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-modal-overlay.open .contact-modal {
+      transform: translateY(0);
+    }
+
+    .contact-modal-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .contact-modal-close:hover {
+      background: var(--border);
+    }
+
+    .contact-modal-close::before,
+    .contact-modal-close::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 2px;
+      background: var(--text-primary);
+    }
+
+    .contact-modal-close::before {
+      transform: rotate(45deg);
+    }
+
+    .contact-modal-close::after {
+      transform: rotate(-45deg);
+    }
+
+    .contact-modal h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-modal p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .contact-form-btn {
+      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--accent);
+      color: var(--bg-primary);
+      border: none;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.5rem;
+    }
+
+    .contact-form-btn:hover {
+      background: #ff6347;
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
+    .contact-form-success {
+      text-align: center;
+      padding: 2rem 0;
+    }
+
+    .contact-form-success h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #22c55e;
+    }
+
+    .contact-form-success p {
+      margin-bottom: 0;
     }
 
     /* ===== SCROLL PROGRESS ===== */
@@ -1253,8 +1606,27 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .process-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .services-header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .services-title {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+      }
+
+      .process-header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .process-title {
+        font-size: clamp(2.5rem, 6vw, 5rem);
+      }
+
+      .cta-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
       }
 
       .footer-grid {
@@ -1299,18 +1671,21 @@
         font-size: 2.5rem;
       }
 
-      .stats-grid,
-      .process-grid {
+      .stats-grid {
         grid-template-columns: 1fr;
       }
 
-      .service-card {
-        grid-template-columns: 1fr;
+      .service-row {
+        grid-template-columns: 80px 1fr;
         gap: 1rem;
       }
 
-      .service-tags {
-        justify-content: flex-start;
+      .process-card {
+        flex: 0 0 280px;
+      }
+
+      .cta-title {
+        font-size: clamp(2rem, 5vw, 3rem);
       }
 
       .footer-grid {
@@ -1354,6 +1729,7 @@
 
     /* Disable expensive effects on mobile for performance */
     @media (max-width: 768px) {
+
       .hero-glow,
       .hero-glow-2,
       .hero-network {
@@ -1377,6 +1753,30 @@
 </head>
 
 <body>
+  <!-- Contact Modal -->
+  <div class="contact-modal-overlay" id="contact-modal">
+    <div class="contact-modal">
+      <button class="contact-modal-close" id="contact-modal-close"></button>
+      <h3>Let's Work Together</h3>
+      <p>Tell us about your project and we'll get back to you soon.</p>
+      <form class="contact-form" id="contact-form" action="https://formspree.io/f/xreevwkz" method="POST">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" placeholder="Tell us about your project..." required></textarea>
+        </div>
+        <button type="submit" class="contact-form-btn">Send Message</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Scroll Progress Indicator -->
   <div class="scroll-progress"></div>
 
@@ -1399,7 +1799,7 @@
     </div>
 
     <div class="nav-right">
-      <a href="#contact" class="btn-outline btn-outline-white">Let's Talk</a>
+      <button class="btn-outline btn-outline-white" onclick="openContactModal()">Let's Talk</button>
       <div class="hamburger" id="hamburger-btn">
         <span></span>
         <span></span>
@@ -1418,9 +1818,9 @@
     <div class="nav-drawer-content">
       <div class="nav-drawer-links">
         <a href="#" class="nav-drawer-link active">Home</a>
-        <a href="#works" class="nav-drawer-link">Works</a>
+        <a href="#work" class="nav-drawer-link">Works</a>
         <a href="#about" class="nav-drawer-link">About</a>
-        <a href="#contact" class="nav-drawer-link">Contact</a>
+        <a href="javascript:void(0)" class="nav-drawer-link" onclick="closeNavDrawer(); openContactModal();">Contact</a>
       </div>
 
       <div class="nav-drawer-sections">
@@ -1455,7 +1855,8 @@
         <p class="hero-description">
           We develop consumer products—physical and digital—from concept to launch.
         </p>
-        <a href="#contact" class="btn-outline btn-accent" style="width: fit-content;">Start a Project</a>
+        <button class="btn-outline btn-accent" style="width: fit-content;" onclick="openContactModal()">Start a
+          Project</button>
       </div>
 
       <div class="hero-right">
@@ -1492,7 +1893,7 @@
   </section>
 
   <!-- About Section -->
-  <section class="about-section">
+  <section id="about" class="about-section">
     <div class="about-content">
       <p class="section-label">(About)</p>
       <h2 id="scroll-text" class="about-text">
@@ -1603,54 +2004,59 @@
 
   <!-- Services Section -->
   <section id="services" class="services-section">
-    <div class="services-container">
-      <div class="services-header">
-        <p class="section-label">(Services)</p>
-        <h2 class="services-title">How We Can Help</h2>
+    <div class="services-header">
+      <h2 class="services-title">HOW WE<br>CAN HELP</h2>
+      <span class="services-label">(Services)</span>
+    </div>
+
+    <div class="services-list">
+      <div class="service-row" onclick="this.classList.toggle('expanded')">
+        <span class="service-row-number">01<span class="dot">.</span></span>
+        <div class="service-row-content">
+          <h3 class="service-row-title">Physical Products</h3>
+          <div class="service-row-details">
+            <p class="service-row-desc">Consumer products from concept through prototyping, manufacturing, and
+              licensing. We've built products that made it to retail shelves.</p>
+            <div class="service-row-tags">
+              <span class="service-row-tag">Concept Development</span>
+              <span class="service-row-tag">Prototyping</span>
+              <span class="service-row-tag">Manufacturing</span>
+              <span class="service-row-tag">Licensing</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-number">01<span class="dot">.</span></div>
-          <div class="service-content">
-            <h3>Physical Products</h3>
-            <p>Consumer products from concept through prototyping, manufacturing, and licensing. We've built products
-              that made it to retail shelves.</p>
-          </div>
-          <div class="service-tags">
-            <span class="service-tag">Concept Development</span>
-            <span class="service-tag">Prototyping</span>
-            <span class="service-tag">Manufacturing</span>
-            <span class="service-tag">Licensing</span>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-number">02<span class="dot">.</span></div>
-          <div class="service-content">
-            <h3>Digital Products</h3>
-            <p>Apps and software that solve real problems. Design, development, and launch—not just wireframes.</p>
-          </div>
-          <div class="service-tags">
-            <span class="service-tag">iOS Apps</span>
-            <span class="service-tag">Web Apps</span>
-            <span class="service-tag">UI/UX</span>
-            <span class="service-tag">Development</span>
+      <div class="service-row" onclick="this.classList.toggle('expanded')">
+        <span class="service-row-number">02<span class="dot">.</span></span>
+        <div class="service-row-content">
+          <h3 class="service-row-title">Digital Products</h3>
+          <div class="service-row-details">
+            <p class="service-row-desc">Apps and software that solve real problems. Design, development, and launch—not
+              just wireframes.</p>
+            <div class="service-row-tags">
+              <span class="service-row-tag">iOS Apps</span>
+              <span class="service-row-tag">Web Apps</span>
+              <span class="service-row-tag">UI/UX</span>
+              <span class="service-row-tag">Development</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div class="service-card">
-          <div class="service-number">03<span class="dot">.</span></div>
-          <div class="service-content">
-            <h3>Brand & Web</h3>
-            <p>For founders and businesses who need to look as good as their product. Identity, packaging, and websites
-              built to convert.</p>
-          </div>
-          <div class="service-tags">
-            <span class="service-tag">Brand Identity</span>
-            <span class="service-tag">Packaging</span>
-            <span class="service-tag">Web Design</span>
-            <span class="service-tag">Conversion</span>
+      <div class="service-row" onclick="this.classList.toggle('expanded')">
+        <span class="service-row-number">03<span class="dot">.</span></span>
+        <div class="service-row-content">
+          <h3 class="service-row-title">Brand & Web</h3>
+          <div class="service-row-details">
+            <p class="service-row-desc">For founders and businesses who need to look as good as their product. Identity,
+              packaging, and websites built to convert.</p>
+            <div class="service-row-tags">
+              <span class="service-row-tag">Brand Identity</span>
+              <span class="service-row-tag">Packaging</span>
+              <span class="service-row-tag">Web Design</span>
+              <span class="service-row-tag">Conversion</span>
+            </div>
           </div>
         </div>
       </div>
@@ -1659,39 +2065,35 @@
 
   <!-- Process Section -->
   <section id="process" class="process-section">
-    <div class="process-container">
-      <div class="process-header">
-        <p class="section-label">(Process)</p>
-        <h2 class="process-title">How We Work</h2>
-      </div>
+    <div class="process-header">
+      <h2 class="process-title">HOW WE<br>WORK</h2>
+      <span class="process-label">(Process)</span>
+    </div>
 
-      <div class="process-grid">
+    <div class="process-scroll-wrapper">
+      <div class="process-carousel">
         <div class="process-card">
-          <span class="process-step-label">Step</span>
-          <div class="process-step-number">01<span class="dot">.</span></div>
-          <h3>Discovery</h3>
+          <div class="process-step-number">STEP 1<span class="dot">.</span></div>
+          <h3>Discovery<br>Phase</h3>
           <p>Understanding your goals, pain points, audience, and what sets you apart.</p>
         </div>
 
         <div class="process-card">
-          <span class="process-step-label">Step</span>
-          <div class="process-step-number">02<span class="dot">.</span></div>
-          <h3>Kickoff</h3>
+          <div class="process-step-number">STEP 2<span class="dot">.</span></div>
+          <h3>Project<br>Kickoff</h3>
           <p>Setting up projects, aligning on scope and milestones, and diving into the work.</p>
         </div>
 
         <div class="process-card">
-          <span class="process-step-label">Step</span>
-          <div class="process-step-number">03<span class="dot">.</span></div>
-          <h3>Refine</h3>
+          <div class="process-step-number">STEP 3<span class="dot">.</span></div>
+          <h3>Receive<br>& Refine</h3>
           <p>Sharing initial designs, gathering feedback, and fine-tuning together.</p>
         </div>
 
         <div class="process-card">
-          <span class="process-step-label">Step</span>
-          <div class="process-step-number">04<span class="dot">.</span></div>
-          <h3>Launch</h3>
-          <p>Launching with confidence and supporting your next moves.</p>
+          <div class="process-step-number">STEP 4<span class="dot">.</span></div>
+          <h3>Continue<br>& Grow</h3>
+          <p>Launching with confidence and supporting your next extraordinary moves.</p>
         </div>
       </div>
     </div>
@@ -1705,8 +2107,8 @@
           <p class="section-label">(FAQ)</p>
           <h2 class="faq-title">FAQ</h2>
         </div>
-        <p class="faq-subtitle">Got specific questions? <a href="#contact"
-            style="color: var(--accent); text-decoration: none;">Contact Us</a></p>
+        <p class="faq-subtitle">Got specific questions? <a href="javascript:void(0)" onclick="openContactModal()"
+            style="color: var(--accent); text-decoration: none; cursor: pointer;">Contact Us</a></p>
       </div>
 
       <div class="faq-list">
@@ -1771,11 +2173,17 @@
 
   <!-- CTA Section -->
   <section id="contact" class="cta-section">
+    <div class="cta-bg-image"></div>
     <div class="cta-bg"></div>
     <div class="cta-content">
-      <p class="section-label">(Let's Connect)</p>
-      <h2 class="cta-title">Have a product idea?<br>Let's build it.</h2>
-      <a href="mailto:hello@200lab.dev" class="btn-outline btn-accent">Get in Touch</a>
+      <div class="cta-left">
+        <h2 class="cta-title">LET'S WORK<br>TOGETHER</h2>
+      </div>
+      <div class="cta-right">
+        <p class="cta-subtitle">Have a project in mind? We'd love to hear about it. Let's create something great
+          together!</p>
+        <button class="cta-btn" onclick="openContactModal()">Get in Touch</button>
+      </div>
     </div>
   </section>
 
@@ -1792,27 +2200,27 @@
 
         <div class="footer-column">
           <h4>(Links)</h4>
-          <a href="#work">Work</a>
-          <a href="#services">Services</a>
-          <a href="#process">Process</a>
-          <a href="#faq">FAQ</a>
+          <a href="#">Home</a>
+          <a href="#about">About</a>
+          <a href="#work">Works</a>
+          <a href="javascript:void(0)" onclick="openContactModal()">Contact</a>
         </div>
 
         <div class="footer-column">
           <h4>(Socials)</h4>
-          <a href="#">X / Twitter</a>
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
+          <a href="https://www.x.com/twohundredlab" target="_blank">X/Twitter</a>
+          <a href="https://www.instagram.com/200.lab/" target="_blank">Instagram</a>
+          <a href="https://www.linkedin.com/company/200lab" target="_blank">LinkedIn</a>
         </div>
 
         <div class="footer-column">
           <h4>(Email)</h4>
-          <a href="mailto:hello@200lab.dev" style="font-size: 1rem; color: #000000;">hello@200lab.dev</a>
+          <a href="mailto:hello@200lab.dev" style="font-weight: 600;">hello@200lab.dev</a>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <p class="footer-copyright">© 2026 Two Hundred LLC. All Rights Reserved.</p>
+        <p class="footer-copyright">@2026 Two Hundred LLC. All Rights Reserved</p>
         <div class="footer-legal">
           <a href="#">Privacy Policy</a>
           <a href="#">Terms of Service</a>
@@ -1822,6 +2230,71 @@
   </footer>
 
   <script>
+    // Contact Modal
+    const contactModal = document.getElementById('contact-modal');
+    const contactModalClose = document.getElementById('contact-modal-close');
+    const contactForm = document.getElementById('contact-form');
+
+    function openContactModal() {
+      contactModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeContactModal() {
+      contactModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    contactModalClose.addEventListener('click', closeContactModal);
+
+    // Close modal when clicking outside
+    contactModal.addEventListener('click', (e) => {
+      if (e.target === contactModal) {
+        closeContactModal();
+      }
+    });
+
+    // Handle form submission with Formspree
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const submitBtn = contactForm.querySelector('.contact-form-btn');
+      const originalText = submitBtn.textContent;
+
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          contactForm.innerHTML = `
+            <div class="contact-form-success">
+              <h4>Message Sent!</h4>
+              <p>Thanks for reaching out. We'll get back to you soon.</p>
+            </div>
+          `;
+          setTimeout(() => {
+            closeContactModal();
+            // Reset form after closing
+            setTimeout(() => location.reload(), 500);
+          }, 2000);
+        } else {
+          throw new Error('Form submission failed');
+        }
+      } catch (error) {
+        submitBtn.textContent = 'Error - Try Again';
+        submitBtn.disabled = false;
+        setTimeout(() => {
+          submitBtn.textContent = originalText;
+        }, 2000);
+      }
+    });
+
     // Navigation Drawer
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navDrawer = document.getElementById('nav-drawer');
@@ -1855,10 +2328,15 @@
       link.addEventListener('click', closeNavDrawer);
     });
 
-    // Close drawer on escape key
+    // Close drawer or modal on escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && navDrawer.classList.contains('open')) {
-        closeNavDrawer();
+      if (e.key === 'Escape') {
+        if (contactModal.classList.contains('open')) {
+          closeContactModal();
+        }
+        if (navDrawer.classList.contains('open')) {
+          closeNavDrawer();
+        }
       }
     });
 
