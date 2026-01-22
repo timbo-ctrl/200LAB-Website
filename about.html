@@ -83,8 +83,14 @@
       width: 640px;
       height: auto;
       transform-origin: top left;
-      transition: none;
-      will-change: transform;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: width;
+      display: block;
+    }
+
+    /* When scrolled, shrink logo using CSS transform/width */
+    nav.scrolled .nav-logo {
+      width: 120px;
     }
 
     .nav-center {
@@ -817,7 +823,11 @@
       }
 
       .nav-logo {
-        width: 200px;
+        width: 280px;
+      }
+
+      nav.scrolled .nav-logo {
+        width: 100px;
       }
 
       .about-hero {
@@ -1195,20 +1205,19 @@
       // Navbar scroll effect
       if (scrollY > 50) {
         navbar.classList.add('scrolled');
+      }
+      // Logo scaling (CSS TRANSITION BASED)
+      // Toggle navbar background AND logo size
+      const isMobile = window.innerWidth <= 768;
+      const threshold = isMobile ? 30 : 50;
+
+      heroLogo.style.transform = ''; // Ensure no manual JS transform conflicts
+
+      if (window.scrollY > threshold) {
+        navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
-
-      // Logo scaling (Similar to index)
-      const maxLogo = window.innerWidth <= 400 ? 200 : (window.innerWidth <= 768 ? 280 : 640);
-      const minLogo = window.innerWidth <= 400 ? 80 : (window.innerWidth <= 768 ? 100 : 120);
-      const scrollDistance = 200;
-
-      const progress = Math.min(scrollY / scrollDistance, 1);
-      const currentWidth = maxLogo - (maxLogo - minLogo) * progress;
-      const scale = currentWidth / maxLogo;
-
-      if (heroLogo) heroLogo.style.transform = `scale(${scale})`;
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true });
