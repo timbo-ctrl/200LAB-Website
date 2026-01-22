@@ -2562,20 +2562,25 @@
       if (!cachedLogoSizes) updateCachedSizes();
       const sizes = cachedLogoSizes;
 
-      // === LOGO SCALING ===
-      const logoScrollProgress = Math.min(Math.max(scrollY / sizes.scrollDistance, 0), 1);
-      const eased = 1 - Math.pow(1 - logoScrollProgress, 3);
-      const currentWidth = sizes.max - (sizes.max - sizes.min) * eased;
-      const scale = Math.max(0.1, Math.min(1, currentWidth / sizes.max));
+      // === LOGO SCALING (Desktop Only) ===
+      if (!isMobile) {
+        const logoScrollProgress = Math.min(Math.max(scrollY / sizes.scrollDistance, 0), 1);
+        const eased = 1 - Math.pow(1 - logoScrollProgress, 3);
+        const currentWidth = sizes.max - (sizes.max - sizes.min) * eased;
+        const scale = Math.max(0.1, Math.min(1, currentWidth / sizes.max));
 
-      // Only update DOM if scale actually changed (avoid unnecessary style recalcs)
-      if (Math.abs(scale - lastScale) > 0.001) {
-        heroLogo.style.transform = `scale(${scale})`;
-        lastScale = scale;
+        // Only update DOM if scale actually changed (avoid unnecessary style recalcs)
+        if (Math.abs(scale - lastScale) > 0.001) {
+          heroLogo.style.transform = `scale(${scale})`;
+          lastScale = scale;
+        }
+      } else {
+        // Ensure reset on mobile if orientation changes or resize happens
+        heroLogo.style.transform = 'none';
       }
 
       // Toggle navbar background (only when state changes)
-      const shouldBeScrolled = logoScrollProgress > 0.3;
+      const shouldBeScrolled = scrollY > 50; // Simple threshold for mobile/desktop navbar bg
       if (shouldBeScrolled !== lastScrolled) {
         if (shouldBeScrolled) {
           navbar.classList.add('scrolled');
