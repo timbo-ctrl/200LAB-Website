@@ -1041,9 +1041,7 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       overscroll-behavior-x: contain;
-      /* Prevent elastic/momentum scroll past bounds */
-      /* Add padding-right to the last child instead via pseudo-element to look better if needed, 
-         but for now removing wrapper right padding fixes the 'blank space' scroll issue */
+      scroll-snap-type: x mandatory;
     }
 
     .process-scroll-wrapper::-webkit-scrollbar {
@@ -1051,15 +1049,8 @@
     }
 
     .process-carousel {
-      display: flex;
+      display: inline-flex;
       gap: 0;
-      width: max-content;
-      /* Changed from min-width to prevent over-scrolling */
-    }
-
-    .process-card:last-child {
-      padding-right: 2rem;
-      /* Small breathing room at the end */
     }
 
     .process-card {
@@ -1067,6 +1058,7 @@
       padding: 2.5rem;
       border-left: 1px solid var(--border);
       transition: all 0.3s ease;
+      scroll-snap-align: start;
     }
 
     .process-card:first-child {
