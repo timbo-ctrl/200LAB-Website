@@ -42,6 +42,8 @@
       color: var(--text-primary);
       overflow-x: hidden;
       line-height: 1.6;
+      overscroll-behavior-y: none;
+      /* Prevent bounce/pull-to-refresh feel on some browsers */
     }
 
     .font-display {
@@ -2633,8 +2635,14 @@
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
-        // Only recalculate if width changed (not just height)
-        if (Math.abs(window.innerWidth - lastWidth) > 10) {
+        const widthChanged = Math.abs(window.innerWidth - lastWidth) > 10;
+
+        // On mobile, ignore height-only changes (address bar resizing)
+        if (isMobile && !widthChanged) {
+          return;
+        }
+
+        if (widthChanged) {
           lastWidth = window.innerWidth;
           updateCachedSizes();
           handleAllScrollEffects();
