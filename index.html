@@ -1027,9 +1027,11 @@
       position: relative;
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 0 2rem 2rem;
+      padding: 0 0 2rem 2rem;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      /* Add padding-right to the last child instead via pseudo-element to look better if needed, 
+         but for now removing wrapper right padding fixes the 'blank space' scroll issue */
     }
 
     .process-scroll-wrapper::-webkit-scrollbar {
@@ -1413,6 +1415,25 @@
       transition: color 0.3s ease;
     }
 
+    /* Mobile Footer Logo */
+    .footer-mobile-logo {
+      display: none;
+      width: 100%;
+      max-width: 200px;
+      margin: 2rem auto;
+      height: auto;
+    }
+
+    @media (max-width: 768px) {
+      .footer-brand img {
+        display: none;
+      }
+
+      .footer-mobile-logo {
+        display: block;
+      }
+    }
+
     .footer-legal a:hover {
       color: var(--bg-primary);
     }
@@ -1430,6 +1451,19 @@
       pointer-events: none;
       z-index: 0;
       line-height: 1;
+    }
+
+    @media (max-width: 768px) {
+      .footer-watermark {
+        bottom: -40px;
+        /* Pull it up slightly on mobile */
+        font-size: 150px;
+      }
+
+      /* Ensure footer clips content */
+      footer {
+        overflow: hidden;
+      }
     }
 
     /* ===== CONTACT MODAL ===== */
@@ -2079,7 +2113,7 @@
 
       <div class="stats-grid">
         <div class="stat-item">
-          <div class="stat-number">10<span class="accent">+</span></div>
+          <div class="stat-number">70<span class="accent">+</span></div>
           <p class="stat-label">Products Launched</p>
         </div>
         <div class="stat-item">
@@ -2101,7 +2135,7 @@
   <!-- Services Section -->
   <section id="services" class="services-section">
     <div class="services-header">
-      <h2 class="services-title">WHAT WE<br>CAN DO</h2>
+      <h2 class="services-title">WHAT WE<br>DO</h2>
       <span class="services-label">(Services)</span>
     </div>
 
@@ -2313,6 +2347,8 @@
           <a href="mailto:hello@200lab.dev" style="font-weight: 600;">hello@200lab.dev</a>
         </div>
       </div>
+
+      <img src="200logo-black-tm.png" alt="200LAB" class="footer-mobile-logo">
 
       <div class="footer-bottom">
         <p class="footer-copyright">@2026 Two Hundred LLC. All Rights Reserved</p>
