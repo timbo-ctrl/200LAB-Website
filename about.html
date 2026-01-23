@@ -167,6 +167,30 @@
       border-color: rgba(255, 255, 255, 0.5);
     }
 
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-radius: 100px;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      background: var(--accent);
+      color: var(--bg-primary);
+      box-shadow: 0 0 30px var(--accent-glow);
+    }
+
     .hamburger {
       display: flex;
       flex-direction: column;
@@ -1100,8 +1124,7 @@
           We believe the best work comes from people who give a damn. Who lose sleep over details. Who can't stop until
           it's right. <br><br><span style="color: var(--text-primary);">That's us.</span>
         </p>
-        <button class="btn-outline btn-accent" onclick="openContactModal()"
-          style="padding: 1rem 3rem; font-size: 1rem;">Start a Project</button>
+        <button class="cta-btn" onclick="openContactModal()">Start a Project</button>
       </div>
     </div>
   </section>
@@ -1111,7 +1134,9 @@
     <div class="footer-container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="200logo-black-tm.png" alt="200LAB">
+          <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" style="cursor: pointer;">
+            <img src="200logo-black-tm.png" alt="200LAB">
+          </a>
         </div>
 
         <div class="footer-column">
@@ -1135,7 +1160,9 @@
         </div>
       </div>
 
-      <img src="200logo-black-tm.png" alt="200LAB" class="footer-mobile-logo">
+      <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" style="cursor: pointer;">
+        <img src="200logo-black-tm.png" alt="200LAB" class="footer-mobile-logo">
+      </a>
 
       <div class="footer-bottom">
         <p class="footer-copyright">@2026 Two Hundred LLC. All Rights Reserved</p>
