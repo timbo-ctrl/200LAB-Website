@@ -564,24 +564,25 @@
     .marquee {
       overflow: hidden;
       white-space: nowrap;
+      width: 100%;
     }
 
     .marquee-content {
-      display: inline-block;
-      animation: marquee 30s linear infinite;
+      display: inline-flex;
+      animation: marquee 40s linear infinite;
+      will-change: transform;
     }
 
     .marquee-content img {
-      display: inline-block;
+      flex-shrink: 0;
       width: auto;
-      height: auto;
-      max-height: 40px;
+      height: 40px;
       max-width: 140px;
-      margin: 0 4rem;
+      margin: 0 3rem;
       vertical-align: middle;
       opacity: 0.6;
       filter: grayscale(100%) brightness(1.2);
-      transition: all 0.4s ease;
+      transition: opacity 0.4s ease, filter 0.4s ease;
     }
 
     .marquee-content img:hover {
@@ -2419,6 +2420,15 @@
             splashScreen.remove();
           }, 800);
         }, 1000);
+      }
+
+      // Fix marquee animation after images load
+      const marqueeContent = document.querySelector('.marquee-content');
+      if (marqueeContent) {
+        // Force animation restart to fix sizing issues
+        marqueeContent.style.animation = 'none';
+        marqueeContent.offsetHeight; // Trigger reflow
+        marqueeContent.style.animation = '';
       }
     });
 
