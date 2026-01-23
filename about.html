@@ -93,8 +93,9 @@
       pointer-events: auto;
     }
 
-    .nav-logo-container {
-      position: relative;
+    .nav-logo-link {
+      display: block;
+      /* removed pointer-events */
     }
 
     .nav-logo {
@@ -626,6 +627,11 @@
       color: var(--bg-primary);
     }
 
+    /* Mobile Footer Logo */
+    .footer-mobile-logo-link {
+      display: none;
+    }
+
     .footer-mobile-logo {
       display: none;
       width: 100%;
@@ -897,6 +903,10 @@
         display: none;
       }
 
+      .footer-mobile-logo-link {
+        display: block;
+      }
+
       .footer-mobile-logo {
         display: block;
       }
@@ -949,7 +959,7 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-logo-container">
-      <a href="index.html" aria-label="Home">
+      <a href="index.html" aria-label="Home" class="nav-logo-link">
         <img src="200logo-green.png" alt="200LAB" class="nav-logo" id="hero-logo">
       </a>
     </div>
@@ -1178,15 +1188,16 @@
         </div>
       </div>
 
-      <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" style="cursor: pointer;">
+      <a href="javascript:void(0)" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="cursor: pointer;"
+        class="footer-mobile-logo-link">
         <img loading="lazy" src="200logo-black-tm.png" alt="200LAB" class="footer-mobile-logo">
       </a>
 
       <div class="footer-bottom">
         <p class="footer-copyright">@2026 Two Hundred LLC. All Rights Reserved</p>
         <div class="footer-legal">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
+          <a href="javascript:void(0)">Privacy Policy</a>
+          <a href="javascript:void(0)">Terms of Service</a>
         </div>
       </div>
     </div>
