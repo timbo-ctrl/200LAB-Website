@@ -1041,7 +1041,6 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
       overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
     }
 
     .process-scroll-wrapper::-webkit-scrollbar {
@@ -1049,8 +1048,9 @@
     }
 
     .process-carousel {
-      display: inline-flex;
+      display: flex;
       gap: 0;
+      width: fit-content;
     }
 
     .process-card {
@@ -1058,7 +1058,6 @@
       padding: 2.5rem;
       border-left: 1px solid var(--border);
       transition: all 0.3s ease;
-      scroll-snap-align: start;
     }
 
     .process-card:first-child {
