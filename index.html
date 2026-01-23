@@ -2184,7 +2184,7 @@
     </div>
 
     <div class="services-list">
-      <div class="service-row" onclick="this.classList.toggle('expanded')">
+      <div class="service-row">
         <span class="service-row-number">01<span class="dot">.</span></span>
         <div class="service-row-content">
           <h3 class="service-row-title">Physical Products</h3>
@@ -2201,7 +2201,7 @@
         </div>
       </div>
 
-      <div class="service-row" onclick="this.classList.toggle('expanded')">
+      <div class="service-row">
         <span class="service-row-number">02<span class="dot">.</span></span>
         <div class="service-row-content">
           <h3 class="service-row-title">Digital Products</h3>
@@ -2218,7 +2218,7 @@
         </div>
       </div>
 
-      <div class="service-row" onclick="this.classList.toggle('expanded')">
+      <div class="service-row">
         <span class="service-row-number">03<span class="dot">.</span></span>
         <div class="service-row-content">
           <h3 class="service-row-title">Brand & Web</h3>
@@ -2735,6 +2735,23 @@
             block: 'start'
           });
         }
+      });
+    });
+
+    // Service Row Accordion
+    document.querySelectorAll('.service-row').forEach(row => {
+      row.addEventListener('click', (e) => {
+        // Prevent any potential default behavior or bubbling
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Toggle current row
+        const wasExpanded = row.classList.contains('expanded');
+
+        // Optional: Close others? The original inline code didn't, so let's stick to toggle.
+        // But typically accordions close others. The inline code `this.classList.toggle` implies independent toggling.
+        // Let's stick to independent toggling to match original intent, but robustly.
+        row.classList.toggle('expanded');
       });
     });
   </script>
