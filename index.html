@@ -76,13 +76,14 @@
     nav.scrolled {
       padding: 1rem 2rem;
       background: transparent;
-      align-items: center;
       pointer-events: auto;
     }
 
-    /* When scrolled, shrink logo using CSS transform/width */
+    /* When scrolled, shrink logo using transform to avoid layout shift */
     nav.scrolled .nav-logo {
-      width: 120px;
+      transform: scale(0.1875);
+      /* 120/640 = 0.1875 */
+      transform-origin: top left;
     }
 
     .nav-logo-container {
@@ -93,9 +94,8 @@
       width: 640px;
       height: auto;
       transform-origin: top left;
-      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-      /* Smooth 'Apple-like' ease */
-      will-change: width;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
       display: block;
     }
 
@@ -1746,7 +1746,8 @@
       }
 
       nav.scrolled .nav-logo {
-        width: 100px;
+        transform: scale(0.357);
+        /* 100/280 = 0.357 */
       }
 
       .hero {
@@ -2148,7 +2149,7 @@
           <p class="stat-label">Products Launched</p>
         </div>
         <div class="stat-item">
-          <div class="stat-number">14</div>
+          <div class="stat-number">14<span class="accent" style="opacity: 0">+</span></div>
           <p class="stat-label">Product IP Portfolio</p>
         </div>
         <div class="stat-item">
