@@ -1275,6 +1275,17 @@
       box-shadow: 0 0 30px var(--accent-glow);
     }
 
+    .private-projects-btn {
+      border-color: var(--accent);
+      color: var(--accent);
+      cursor: pointer;
+    }
+
+    .private-projects-btn:hover {
+      color: white !important;
+      background: var(--accent);
+    }
+
     /* ===== FOOTER (Original red style with newsletter) ===== */
     footer {
       background: var(--accent);
@@ -2139,7 +2150,7 @@
       </div>
     </div>
     <div style="text-align: center; margin-top: 4rem;">
-      <button onclick="openContactModal()" class="cta-btn" style="border-color: var(--accent); color: var(--accent);">
+      <button onclick="openContactModal()" class="cta-btn private-projects-btn">
         View private projects
       </button>
     </div>
